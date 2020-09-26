@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 'use strict';
 
 var CLOUD_WIDTH = 420;
@@ -28,6 +27,10 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var renderChartBar = function (ctx, x, y, height) {
+  ctx.fillRect(x, y, BAR_WIDTH, height);
+};
+
 window.renderStatistics = function (ctx, names, times) {
 
   renderCloud(
@@ -54,11 +57,12 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var barHeight = CHART_HEIGHT * times[i] / maxTime;
     var chartX = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+    var chartY = CLOUD_HEIGHT - barHeight - FONT_GAP;
 
     ctx.fillText(
         Math.round(times[i]),
         chartX,
-        CLOUD_HEIGHT - barHeight - FONT_GAP - GAP
+        chartY - GAP
     );
 
     var lightness = Math.round(Math.random() * 100);
@@ -69,12 +73,7 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = `hsl(240, 100%, ${lightness}%)`;
     }
 
-    ctx.fillRect(
-        chartX,
-        CLOUD_HEIGHT - barHeight - FONT_GAP,
-        BAR_WIDTH,
-        barHeight
-    );
+    renderChartBar(ctx, chartX, chartY, barHeight);
 
     ctx.fillStyle = `#000`;
 
