@@ -31,6 +31,10 @@ var renderChartBar = function (ctx, x, y, height) {
   ctx.fillRect(x, y, BAR_WIDTH, height);
 };
 
+var getRandomColor = function () {
+  return Math.round(Math.random() * 95);
+};
+
 window.renderStatistics = function (ctx, names, times) {
 
   renderCloud(
@@ -65,12 +69,10 @@ window.renderStatistics = function (ctx, names, times) {
         chartY - GAP
     );
 
-    var lightness = Math.round(Math.random() * 100);
-
     if (names[i] === `Вы`) {
       ctx.fillStyle = `rgba(255, 0, 0, 1)`;
     } else {
-      ctx.fillStyle = `hsl(240, 100%, ${lightness}%)`;
+      ctx.fillStyle = `hsl(240, 100%, ${getRandomColor()}%)`;
     }
 
     renderChartBar(ctx, chartX, chartY, barHeight);
