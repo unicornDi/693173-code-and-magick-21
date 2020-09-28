@@ -31,8 +31,9 @@ var renderChartBar = function (ctx, x, y, height) {
   ctx.fillRect(x, y, BAR_WIDTH, height);
 };
 
-var getRandomColor = function () {
-  return Math.round(Math.random() * 95);
+var getRandomHslColor = function (hue, saturation) {
+  var lightness = Math.round(Math.random() * 95);
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -72,7 +73,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === `Вы`) {
       ctx.fillStyle = `rgba(255, 0, 0, 1)`;
     } else {
-      ctx.fillStyle = `hsl(240, 100%, ${getRandomColor()}%)`;
+      ctx.fillStyle = getRandomHslColor(240, 100);
     }
 
     renderChartBar(ctx, chartX, chartY, barHeight);
